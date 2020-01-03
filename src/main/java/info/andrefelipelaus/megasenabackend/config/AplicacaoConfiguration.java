@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import info.andrefelipelaus.megasenabackend.controller.service.LoadFileServices;
+import info.andrefelipelaus.megasenabackend.controller.service.CarregaArquivoServices;
 
 /**
  * 
@@ -19,9 +19,9 @@ import info.andrefelipelaus.megasenabackend.controller.service.LoadFileServices;
  */
 
 @Configuration
-@ComponentScan(basePackageClasses = {LoadFileServices.class, JpaConfiguration.class})
+@ComponentScan(basePackageClasses = {CarregaArquivoServices.class, JpaConfiguration.class})
 @EnableAsync
-public class ApplicationConfiguration {
+public class AplicacaoConfiguration {
 
 
 	@Bean
@@ -36,7 +36,7 @@ public class ApplicationConfiguration {
 	}
 	
 	@Bean
-	public LoadFileServices loadFileService() {
-		return LoadFileServices.getInstance(); 
+	public CarregaArquivoServices loadFileService() {
+		return CarregaArquivoServices.getInstance(); 
 	}
 }

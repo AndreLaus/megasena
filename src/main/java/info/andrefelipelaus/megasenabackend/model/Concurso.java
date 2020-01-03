@@ -38,7 +38,7 @@ public class Concurso {
 	private Double rateioQuina;
 	private Integer numeroGanhadoresQuadra;
 	private Double rateioQuadra;
-	private String acumulado;
+	private Boolean acumulado;
 	private Double valorAcumulado;
 	private Double estimativaPremio;
 	private Double acumuladoMegaDaVirada;

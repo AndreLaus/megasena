@@ -12,12 +12,12 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class LoadDataStatusDto {
+public class SituacaoCargaDadosDto {
 
-	private Status download;
-	private Status unzip;
-	private Status convertHtmlToList;
-	private Status convertListToObject;
-	private Status saveInDatabase;
+	private Situacao download;
+	private Situacao unzip;
+	private Situacao convertHtmlToList;
+	private Situacao convertListToObject;
+	private Situacao saveInDatabase;
 	
 }

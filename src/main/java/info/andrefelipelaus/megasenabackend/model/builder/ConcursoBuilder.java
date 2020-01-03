@@ -65,7 +65,12 @@ public class ConcursoBuilder {
 					concurso.setNumeroGanhadoresQuadra(Integer.parseInt(list.get(15)));
 					concurso.setRateioQuadra(decimalFormat.parse(list.get(16)).doubleValue());
 					
-					concurso.setAcumulado(list.get(17));
+					if (list.get(17).equalsIgnoreCase("sim")) {
+						concurso.setAcumulado(true);
+					} else {
+						concurso.setAcumulado(false);
+					}
+					
 					concurso.setValorAcumulado(decimalFormat.parse(list.get(18)).doubleValue());
 					concurso.setEstimativaPremio(decimalFormat.parse(list.get(19)).doubleValue());
 					concurso.setAcumuladoMegaDaVirada(decimalFormat.parse(list.get(20)).doubleValue());

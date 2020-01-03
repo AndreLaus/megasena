@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import info.andrefelipelaus.megasenabackend.controller.dto.LoadDataStatusDto;
-import info.andrefelipelaus.megasenabackend.controller.service.LoadFileServices;
+import info.andrefelipelaus.megasenabackend.controller.dto.SituacaoCargaDadosDto;
+import info.andrefelipelaus.megasenabackend.controller.service.CarregaArquivoServices;
 
 /**
  * 
@@ -23,22 +23,22 @@ import info.andrefelipelaus.megasenabackend.controller.service.LoadFileServices;
 
 @RestController
 @RequestMapping("/admin")
-public class AdministrationController {
+public class AdministracaoController {
 	
 	@Autowired
-	private LoadFileServices loadFileServices;
+	private CarregaArquivoServices carregaArquivoServices;
 
-	@GetMapping("/loadData")
+	@GetMapping("/carregaDados")
 	@Transactional
-	public Response loadResults() {
-		URI uri = URI.create("/admin/verifyLoadData");
-		loadFileServices.loadDataFromLoterias();
+	public Response carregaResultados() {
+		URI uri = URI.create("/admin/verificaSituacaoCarga");
+		carregaArquivoServices.carregaDadosLoterias();
 		return Response.created(uri).build();
 	}
 	
-	@GetMapping("/verifyLoadData")
-	public LoadDataStatusDto virifyLoadData() {
-		return loadFileServices.getLoadStatus();
+	@GetMapping("/verificaSituacaoCarga")
+	public SituacaoCargaDadosDto verificaSituacaoCargaDados() {
+		return carregaArquivoServices.getSituacaoCarga();
 	}
 	
 }

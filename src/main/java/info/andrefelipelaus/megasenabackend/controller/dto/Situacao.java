@@ -7,16 +7,16 @@ package info.andrefelipelaus.megasenabackend.controller.dto;
  * Enumeratuion representado estados
  *
  */
-public enum Status {
+public enum Situacao {
 	OK("Ok"),
-	RUNNIG("Runnig"),
-	PENDING("Pending"),
-	FAILURE("Fail"),
-	NOT_APPLICABLE("N/A");
+	EXECUTANDO("Executando"),
+	PENDENTE("Pendente"),
+	FALHA("Falha"),
+	NAO_SE_APLICA("N/A");
 
 	private String name;
 
-	Status(String name) {
+	Situacao(String name) {
 		this.name = name;
 	}
 	
