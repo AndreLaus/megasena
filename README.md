@@ -11,6 +11,7 @@ O caso de estudo é baseado no jogo de aposta Megasena a intenção é explorar 
 # Funcionalidade da versão atual
 
 - Download do arquivo de resultados diretamente do site e inserção na base de dados em memória
+- Manutenção de cartão de apostas e seus jogos
 
 
 # Artefatos tecnológicos
