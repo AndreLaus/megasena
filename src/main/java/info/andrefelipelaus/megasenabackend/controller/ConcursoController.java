@@ -34,7 +34,7 @@ public class ConcursoController {
 	private ConcursoRepository concursoRepository;
 	
 	
-	@GetMapping("/concursoList")
+	@GetMapping
 	public Page<ConcursoDto> list(@PageableDefault(sort="numero", direction = Direction.DESC, page=0, size=10) Pageable pageable) {
 		Page<Concurso> concursos = concursoRepository.findAll(pageable);
 		return ConcursoDto.convert(concursos);

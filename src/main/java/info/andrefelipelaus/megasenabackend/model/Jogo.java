@@ -33,6 +33,9 @@ public class Jogo {
 	@MapsId("cartaoId")
 	private CartaoAposta cartao;
 	
+	@ManyToOne
+	private Usuario usuario;
+	
 	@ElementCollection
 	private List<Integer> dezenas;
 	
@@ -46,6 +49,7 @@ public class Jogo {
 		this.id.setCartaoId(cartaoAposta.getId());
 		this.id.setPosicao(posicao);
 		this.cartao = cartaoAposta;
+		this.usuario = cartaoAposta.getUsuario();
 		this.dezenas.addAll(dezenas);
 		
 	}

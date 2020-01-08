@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Range;
 
 import info.andrefelipelaus.megasenabackend.model.CartaoAposta;
 import info.andrefelipelaus.megasenabackend.model.Jogo;
+import info.andrefelipelaus.megasenabackend.model.Usuario;
 import info.andrefelipelaus.megasenabackend.model.repository.CartaoApostaRepository;
 import info.andrefelipelaus.megasenabackend.model.repository.JogoRepository;
 import lombok.Data;
@@ -27,8 +28,8 @@ public class CartaoApostaForm {
 	@Size(min = 1, max = 3)
 	private List<JogoForm> jogos;
 
-	public CartaoAposta converter() {
-		return new CartaoAposta(this.quantidadeNumerosJogados);
+	public CartaoAposta converter(Usuario usuario) {
+		return new CartaoAposta(usuario, this.quantidadeNumerosJogados);
 	}
 
 	public List<Jogo> converterJogos(CartaoAposta cartaoAposta) {

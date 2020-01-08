@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,11 +31,16 @@ public class CartaoAposta {
 	@Setter
 	private Long id;
 	
+	@ManyToOne
+	private Usuario usuario;
+	
 	private Integer quantidadeNumerosJogados;
 	
 	@OneToMany(cascade = CascadeType.ALL,
 			mappedBy = "cartao",
-			orphanRemoval = true)
+			orphanRemoval = true, 
+			fetch = FetchType.EAGER)
+	@OrderBy("posicao ASC")
 	@Setter
 	private List<Jogo> jogos;
 	
@@ -42,8 +50,9 @@ public class CartaoAposta {
 	}
 	
 
-	public CartaoAposta(Integer quantidadeNumerosJogados) {
+	public CartaoAposta(Usuario usuario, Integer quantidadeNumerosJogados) {
 		this();
+		this.usuario = usuario;
 		this.quantidadeNumerosJogados = quantidadeNumerosJogados;
 	}
 	
@@ -62,6 +71,7 @@ public class CartaoAposta {
 	}
 
 	public void addJogo(Jogo jogo) {
+		jogo.setUsuario(this.usuario);
 		this.jogos.add(jogo);
 	}
 	
