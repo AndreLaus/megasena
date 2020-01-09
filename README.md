@@ -11,16 +11,20 @@ O caso de estudo é baseado no jogo de aposta Megasena a intenção é explorar 
 # Funcionalidade da versão atual
 
 - Download do arquivo de resultados diretamente do site e inserção na base de dados em memória
-- Manutenção de cartão de apostas e seus jogos
+- Modulo de autencicação via token
+- Manutenção de cartão de apostas e seus jogos (dezenas)
+- Manutenção de Apostas (cartão <-> concurso)
 
 
 # Artefatos tecnológicos
 
 - Spring Boot Web
 - Spring Boot Data (JPA)
+- Spring Boot Security
+- Spring Boot Configuration Processor
 - Spring Boot Dev Tools
 - H2 Database: Banco em memória para testes
 - Eclipse Jersey: Framework para faciliar a implementação RESTful Web Services
 - jsoup: para manipulação dos dados do resultado em formato HTML
 - Lombok: automação de trivialidades como Getters e Setters
-
+- JJWT: biblioteca para JSON Web Tokens
