@@ -1,5 +1,6 @@
 package info.andrefelipelaus.megasenabackend.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,26 @@ public class ConcursoController {
 		Optional<Concurso> optional = concursoRepository.findById(id);
 		if (optional.isPresent()) {
 			return ResponseEntity.ok(new DetalhesConcursoDto(optional.get()));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping(path = "/ultimo")
+	public ResponseEntity<ConcursoDto> ultimo() {
+		Optional<Concurso> optional = concursoRepository.findFirst1ByOrderByNumeroDesc();
+		if (optional.isPresent()) {
+			return ResponseEntity.ok(new ConcursoDto(optional.get()));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping(path = "/ultimos")
+	public ResponseEntity<List<ConcursoDto>> ultimosCinco() {
+		List<Concurso> concursos = concursoRepository.findFirst5ByOrderByNumeroDesc();
+		if (concursos!=null && concursos.size()>0) {
+			return ResponseEntity.ok(ConcursoDto.convert(concursos));
 		}
 		
 		return ResponseEntity.notFound().build();

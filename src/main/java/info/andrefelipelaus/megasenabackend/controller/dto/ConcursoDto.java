@@ -2,6 +2,7 @@ package info.andrefelipelaus.megasenabackend.controller.dto;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
@@ -28,5 +29,9 @@ public class ConcursoDto {
 	
 	public static Page<ConcursoDto> convert(Page<Concurso> concurso) {
 		return concurso.map(ConcursoDto::new);
+	}
+	
+	public static List<ConcursoDto> convert(List<Concurso> concurso) {
+		return concurso.stream().map(ConcursoDto::new).collect(Collectors.toList());
 	}
 }

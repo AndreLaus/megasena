@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,9 +41,9 @@ public class CartaoAposta {
 	
 	@OneToMany(cascade = CascadeType.ALL,
 			mappedBy = "cartao",
-			orphanRemoval = true, 
-			fetch = FetchType.EAGER)
+			orphanRemoval = true)
 	@OrderBy("posicao ASC")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@Setter
 	private List<Jogo> jogos;
 	
