@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +21,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Data;
 
 @Entity
+@Table(
+        name="USUARIO", 
+        uniqueConstraints=
+            @UniqueConstraint(columnNames={"EMAIL"})
+    )
 @Data
 public class Usuario implements UserDetails {
 
@@ -28,6 +35,7 @@ public class Usuario implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	private String nomeCompleto;
 	private String email;
 	private String senha;
 	
@@ -38,6 +46,15 @@ public class Usuario implements UserDetails {
 			inverseJoinColumns = @JoinColumn(columnDefinition = "perfis_id")
 			)
 	private List<Perfil> perfis = new ArrayList<>();
+	
+	public Usuario() {}
+	
+	public Usuario(String nome, String nomeCompleto, String email, String senha) {
+		this.nome = nome;
+		this.nomeCompleto = nomeCompleto;
+		this.email = email;
+		this.senha = senha;
+	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

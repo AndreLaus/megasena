@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import info.andrefelipelaus.megasenabackend.model.repository.UsuarioRepository;
 
@@ -52,14 +54,18 @@ public class SegurancaConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers(HttpMethod.GET, "/concurso/**").permitAll()
-			.antMatchers(HttpMethod.POST, "/auth").permitAll()
+			.antMatchers(HttpMethod.POST, "/user/**").permitAll()
+			.antMatchers(HttpMethod.GET, "/user/exists/**").permitAll()
 			.antMatchers("/h2-console/**").permitAll()
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			.anyRequest().authenticated()
 			.and().csrf().disable()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.cors()
+			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and().headers().frameOptions().disable()
 			.and().addFilterBefore(new AutenticacaoViaTokenFilter(this.tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
+		
+		
 	}
 	
 	/**
@@ -70,4 +76,19 @@ public class SegurancaConfiguration extends WebSecurityConfigurerAdapter {
 		web.ignoring()
         .antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**");
 	}
+	
+	@Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry
+                	.addMapping("/**")
+                    .allowedMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
+                    .allowCredentials(true)
+                    .maxAge(3600);
+            }
+        };
+    }
+	
 }

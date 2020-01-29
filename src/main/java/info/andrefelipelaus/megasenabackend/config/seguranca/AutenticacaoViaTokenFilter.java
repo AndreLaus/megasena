@@ -28,17 +28,17 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
-		HttpServletRequest req = (HttpServletRequest) request;
-	    HttpServletResponse res = (HttpServletResponse) response;
+//		HttpServletRequest req = (HttpServletRequest) request;
+//	    HttpServletResponse res = (HttpServletResponse) response;
 
-	    response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-	    response.setHeader("Access-Control-Allow-Credentials", "true");
-	    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
-	    response.setHeader("Access-Control-Max-Age", "3600");
-	    response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+//	    res.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+//	    res.setHeader("Access-Control-Allow-Credentials", "true");
+//	    res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
+//	    res.setHeader("Access-Control-Max-Age", "3600");
+//	    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+//		
 		
-		
-		String token = recuperarToken(req);
+		String token = recuperarToken(request);
 
 		boolean valido = tokenService.isTokenValido(token);
 
@@ -47,7 +47,7 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 		}
 		
 
-		filterChain.doFilter(req, res);
+		filterChain.doFilter(request, response);
 
 	}
 
